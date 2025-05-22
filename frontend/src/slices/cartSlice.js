@@ -1,23 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { updateCart } from "../utils/cartUtils";
 
-const initialState = localStorage.getItem("cart")
-  ? JSON.parse(localStorage.getItem("cart"))
-  : { cartItme: [] };
+const initialState = localStorage.getItem('cart')
+  ? JSON.parse(localStorage.getItem('cart'))
+  : { cartItems: [] };
 
 const cartSlice = createSlice({
-  name: "cart",
+  name: 'cart',
   initialState,
   reducers: {
     addToCart: (state, action) => {
       const item = action.payload;
-      const existingItem = state.cartItme.find((x) => x._id === item._id);
-      if (existingItem) {
-        state.cartItme = state.cartItme.map((x) =>
-          x._id === existingItem._id ? item : x
+      const existItem = state.cartItems.find((x) => x._id === item._id);
+      if (existItem) {
+        state.cartItems = state.cartItems.map((x) =>
+          x._id === existItem._id ? item : x
         );
       } else {
-        state.cartItme = [...state.cartItme, item];
+        state.cartItems = [...state.cartItems, item];
       }
       return updateCart(state);
     },
