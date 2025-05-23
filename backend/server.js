@@ -6,6 +6,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import { dot } from 'node:test/reporters';
 import { connect } from 'http2';
 import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 
 const port = process.env.PORT || 5000;
@@ -18,6 +19,7 @@ const app = express();
 });
 
 app.use('/api/products', productRoutes); // Use product routes
+app.use('/api/users', userRoutes); // Use user routes
 
 app.use(notFound); // Middleware for 404 errors
 app.use(errorHandler); // Middleware for handling errors

@@ -24,16 +24,16 @@ const ProductScreen = () => {
 
   const [qty, setQty] = useState(1);
   
-  const addToCartHandler = () => {
-    dispatch(addToCart({ productId, qty }));
-    navigate("/cart");
-  }
-
   const {
     data: product,
     isLoading,
     error,
   } = useGetProductDetailsQuery(productId);
+ 
+  const addToCartHandler = () => {
+    dispatch(addToCart({ ...product, qty }));
+    navigate("/cart");
+  };
 
 
   // if (!product) {
@@ -109,7 +109,7 @@ const ProductScreen = () => {
                           <Form.Control
                             as="select"
                             value={qty}
-                            onChange={(e) => setQty(e.target.value)}
+                            onChange={(e) => setQty(Number(e.target.value))}
                           >
                             {[...Array(product.countInStock).keys()].map(
                               (x) => (
